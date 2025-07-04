@@ -1,0 +1,14 @@
+  <mat-form-field>
+    <mat-label>{{ label() }}</mat-label>
+    <input matInput
+           placeholder="Pick one"
+           type="text"
+           [formControl]="innerControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn" (optionSelected)="onOptionSelected($event)">
+      @for (option of filteredOptions(); track option.id) {
+        <!-- TODO: pass display and value expressions -->
+        <mat-option [value]="option">{{option.name}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>

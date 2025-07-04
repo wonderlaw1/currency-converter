@@ -1,0 +1,25 @@
+@let allCurrencies = currencies();
+
+@if (allCurrencies) {
+  <div [formGroup]="form">
+    <div>
+      <app-autocomplete class="control" formControlName="from" label="From: " [options]="allCurrencies!" />
+      <app-autocomplete class="control" formControlName="to" label="To: " [options]="allCurrencies!" />
+    </div>
+    <div>
+      <mat-form-field class="control">
+        <mat-label>Amount</mat-label>
+        <input formControlName="amount" matInput type="number">
+      </mat-form-field>
+
+      @let conversionResult = result();
+
+      <span>Result: @if (conversionResult) {
+        {{ conversionResult.value }} {{ conversionResult.to }}
+        }
+      </span>
+    </div>
+  </div>
+} @else { 
+  <p>loading...</p>
+}
