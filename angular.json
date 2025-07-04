@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "currency-exchange": {
+    "currency-converter": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "currency-exchange:build:production"
+              "buildTarget": "currency-converter:build:production"
             },
             "development": {
-              "buildTarget": "currency-exchange:build:development"
+              "buildTarget": "currency-converter:build:development"
             }
           },
           "defaultConfiguration": "development"
