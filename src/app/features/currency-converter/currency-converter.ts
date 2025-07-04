@@ -14,19 +14,13 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { catchError, debounceTime, filter, map, of, switchMap } from 'rxjs';
-import {
-  ConvertParams,
-  ConvertResponse,
-  CurrencyHttpService,
-} from '../../core/services/currency-http.service';
+import { CurrencyHttpService } from '../../core/services/currency-http.service';
 import { Autocomplete } from '../../shared/components/autocomplete/autocomplete';
-import { CurrencyItem } from '../../shared/model/currency.model';
-
-// type FormValue = {
-//   from: CurrencyItem;
-//   to: CurrencyItem;
-//   amount: number;
-// };
+import {
+  CurrencyConvertParams,
+  CurrencyConvertResponse,
+  CurrencyItem,
+} from '../../shared/model/currency.model';
 
 @Component({
   selector: 'app-currency-converter',
@@ -42,7 +36,7 @@ export class CurrencyConverter {
     amount: new FormControl(0, Validators.required),
   });
   protected readonly currencies: Signal<CurrencyItem[] | undefined>;
-  protected readonly result: Signal<ConvertResponse | null | undefined>;
+  protected readonly result: Signal<CurrencyConvertResponse | null | undefined>;
   private currencyHttpService = inject(CurrencyHttpService);
   private destroy = inject(DestroyRef);
 
@@ -59,7 +53,7 @@ export class CurrencyConverter {
             from: from!.short_code,
             to: to!.short_code,
             amount,
-          } as ConvertParams;
+          } as CurrencyConvertParams;
         }),
         switchMap((value) => {
           return this.currencyHttpService.convert(value);

@@ -14,3 +14,14 @@ export type CurrencyItem = {
   decimal_mark: string;
   thousands_separator: string;
 };
+
+export type CurrencyConvertParams = {
+  from: string;
+  to: string;
+  amount: number;
+};
+
+export type CurrencyConvertResponse = {
+  to: string;
+  value: number;
+};

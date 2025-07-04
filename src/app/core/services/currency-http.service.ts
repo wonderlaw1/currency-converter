@@ -2,21 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  CurrencyConvertParams,
+  CurrencyConvertResponse,
   CurrencyItem,
   GetCurrencyItemsResponse,
 } from '../../shared/model/currency.model';
 import { CURRENCY_BEACON_URL_TOKEN } from '../tokens/currency-beacon-url.token';
-
-export type ConvertParams = {
-  from: string;
-  to: string;
-  amount: number;
-};
-
-export type ConvertResponse = {
-  to: string;
-  value: number;
-};
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +23,8 @@ export class CurrencyHttpService {
       .pipe(map((res) => res.response));
   }
 
-  convert(params: ConvertParams): Observable<ConvertResponse> {
-    return this.http.get<ConvertResponse>(`${this.baseUrl}/convert`, {
+  convert(params: CurrencyConvertParams): Observable<CurrencyConvertResponse> {
+    return this.http.get<CurrencyConvertResponse>(`${this.baseUrl}/convert`, {
       params: params,
     });
   }
